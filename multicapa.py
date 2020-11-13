@@ -26,13 +26,10 @@ t = np.arange(0.0, 1.0, 0.001)
 s = np.sin(2*np.pi*freqs[0]*t)
 plt.ylim(-2,2)
 plt.xlim(-2,2)
-plt.title("red neuronal multicapa", fontsize = 20, color = "blue")
+plt.title("Red neuronal multicapa", fontsize = 20, color = "blue")
 ax.legend(handles=legend_elements, loc='upper left')
 l, = plt.plot(x, y,marker="o", color="red",ls = "None")
 f, = plt.plot(x, y,marker="o", color="green",ls = "None")
-
-esCyan = []
-esCyan.append(1)
 
 def darError(w1,w2,u,ite):
     
@@ -135,21 +132,21 @@ def hacerCalculo(self):
     
     teta = 0.4
     
-    limite = 0.09
+    limite = 0.08
     
-    limiteHola = 6000 
+    lim = 3000 
 
     hacerPaso2 = True
     
-    hey = 0
-    hola = 0
+    a = 0
+    b = 0
     final = False
 
     
     while (hacerPaso2 == True):
         
         ite = 0
-        hola = hola + 1
+        b += 1
         auxErrores = 0
         
         while (ite < len(x)):
@@ -179,20 +176,18 @@ def hacerCalculo(self):
             
             auxErrores = auxErrores + (e*e)
             
-            ite = ite + 1
-            hey = hey + 1
+            ite += 1
+            a += 1
         
-        print(auxErrores/ite)
+        print("lim:",auxErrores/ite)
         if ((auxErrores/ite)<=limite):
             hacerPaso2 = False
-            
-        print(hola)
         
-        if (hola > limiteHola):
-            limite = limite + 0.01
-            limiteHola = limiteHola + 3000
+        if (b > lim):
+            limite += 0.01
+            lim += 3000
             
-        if (hola%500 == 0):
+        if (b%500 == 0):
             hacerRedNeuronal(final,w0,w1,w2,w01,w11,w21,w02,w12,w22)
     final = True
     hacerRedNeuronal(final,w0,w1,w2,w01,w11,w21,w02,w12,w22)
@@ -237,123 +232,6 @@ def onclick(event):
     f.set_xdata(auxX2)
     
     plt.draw()
-
-class Index(object):
-    
-
-    def next(self, event):
-        esCyan.insert(0,1)
-        d.pop()
-        x.pop()
-        y.pop()
-        x5.pop()
-        x5.pop()
-        x5.pop()
-        
-        auxX1 = []
-        auxY1 = []
-        auxX2 = []
-        auxY2 = []
-        
-        s = 0
-        while (s < len(x)):
-            if (d[s] == 1):
-                auxX1.append(x[s])
-                auxY1.append(y[s])
-            else:
-                auxX2.append(x[s])
-                auxY2.append(y[s])
-                
-            s = s + 1
-            
-        l.set_ydata(auxY1)
-        l.set_xdata(auxX1)
-        
-        f.set_ydata(auxY2)
-        f.set_xdata(auxX2)
-        
-        plt.draw()
-        
-
-    def prev(self, event):
-        esCyan.insert(0,0)
-        d.pop()
-        x.pop()
-        y.pop()
-        x5.pop()
-        x5.pop()
-        x5.pop()
-        
-        auxX1 = []
-        auxY1 = []
-        auxX2 = []
-        auxY2 = []
-        
-        s = 0
-        while (s < len(x)):
-            if (d[s] == 1):
-                auxX1.append(x[s])
-                auxY1.append(y[s])
-            else:
-                auxX2.append(x[s])
-                auxY2.append(y[s])
-                
-            s = s + 1
-            
-        l.set_ydata(auxY1)
-        l.set_xdata(auxX1)
-        
-        f.set_ydata(auxY2)
-        f.set_xdata(auxX2)
-        
-        plt.draw()
-        
-        
-    def nuevo(self, event):
-        d.pop()
-        x.pop()
-        y.pop()
-        x5.pop()
-        x5.pop()
-        x5.pop()
-        auxX1 = []
-        auxY1 = []
-        auxX2 = []
-        auxY2 = []
-        
-        s = 0
-        while (s < len(x)):
-            if (d[s] == 1):
-                auxX1.append(x[s])
-                auxY1.append(y[s])
-            else:
-                auxX2.append(x[s])
-                auxY2.append(y[s])
-                
-            s = s + 1
-            
-        l.set_ydata(auxY1)
-        l.set_xdata(auxX1)
-        
-        f.set_ydata(auxY2)
-        f.set_xdata(auxX2)
-        
-        plt.draw()
-        plt.pause(1)
-        plt.clf()
-        plt.cla()
-        hacerCalculo()
-
-"""callback = Index()
-axprev = plt.axes([0.65, 0.05, 0.1, 0.075])
-axnext = plt.axes([0.77, 0.05, 0.1, 0.075])
-axnuevo = plt.axes([0.88, 0.05, 0.1, 0.075])
-bnuevo = Button(axnuevo, 'Apreder',color = "green")
-bnuevo.on_clicked(callback.nuevo)
-bnext = Button(axnext, 'Cyan',color="cyan")
-bnext.on_clicked(callback.next)
-bprev = Button(axprev, 'Magenta',color="magenta")
-bprev.on_clicked(callback.prev)"""
 
 i = plt.axes([0.80, 0.01, 0.1, 0.075])
 
